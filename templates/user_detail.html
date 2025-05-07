@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ username }}'s Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f6f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .profile-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .profile-card h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .profile-card p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .link-button {
+      flex: 1;
+      text-decoration: none;
+      color: #fff;
+      background: #3498db;
+      padding: 10px 0;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .link-button:hover {
+      background: #2c80b4;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <h2>{{ username }}</h2>
+    <p><strong>Total:</strong> {{ info.entries }}</p>
+    <p style="text-align: left; padding-left: 20px;"><strong>Distractions:</strong></p>
+    <ul style="text-align: left; padding-left: 20px;">
+      {% for item, count in info.distr.items() %}
+        <li>{{ item }}: {{ count }}</li>
+      {% endfor %}
+    </ul>
+
+    <div class="links">
+      <a class="link-button" href="{{ url_for('index') }}">← Back</a>
+      <a class="link-button" href="{{ url_for('view_images', username=username) }}">🖼 View Images</a>
+    </div>
+  </div>
+</body>
+</html>
